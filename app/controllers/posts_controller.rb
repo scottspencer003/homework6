@@ -10,6 +10,10 @@ class PostsController < ApplicationController
 
 	def show
 		@post = Post.find(params[:id])
+
+	rescue ActiveRecord::RecordNotFound
+		flash[:error] = "Could not find that post"
+		redirect_to posts_path
 	end	
 
 	def create
@@ -27,6 +31,7 @@ class PostsController < ApplicationController
      
 		redirect_to posts_path
 	end	
+
 
 	private
 	def post_params
